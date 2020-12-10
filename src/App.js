@@ -1,20 +1,22 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import Person from './Person/Person';
 
 class App extends Component {
+  state = {
+    persons: [
+      { name: 'Frank', age: 28 },
+      { name: 'John', age: 30 }
+    ]
+  }
+
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          This is a React App.
-        </p>
-        <Person/>
+        <h1>This is a React App.</h1>
+        <button>Switch Name</button>
+        <Person name={this.state.persons[0].name} age={this.state.persons[0].age}>I'm a software Engineer.</Person>
+        <Person name={this.state.persons[1].name} age={this.state.persons[1].age}>I'm a data Engineer.</Person>
       </div>
     );
     // return React.createElement('div', { className: 'App' }, React.createElement('h1', null, 'I\'m a React App.'));
