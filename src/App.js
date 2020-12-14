@@ -1,20 +1,30 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import Person from './Person/Person';
 
-class App extends Component {
-  state = {
+const app = props => {
+
+  /**
+   * useState returns an array with two object:
+   * 1. the state you keep. (What you put into useState function)
+   * 2. the function to set the state you keep.
+   */
+  const [personsState, setPersonsState] = useState({
     persons: [
       { name: 'Frank', age: 28 },
       { name: 'John', age: 30 }
     ]
-  }
+  });
 
-  switchNameHandler = () => {
-    console.log('Was Clicked!');
-    // This won't work, React would not recognize direct mutation of the state
+  // we can use useState function many times to keep different states.
+  const [otherState, setOtherState] = useState('other value');
+
+  console.log(personsState, otherState);
+
+  const switchNameHandler = () => {
+    // This won't work, React would not recognize direct mutation of the state.
     // this.state.persons[0].name = 'Franky';
-    this.setState({
+    setPersonsState({
       persons: [
         { name: 'Franky', age: 28 },
         { name: 'John', age: 30 }
@@ -22,17 +32,16 @@ class App extends Component {
     })
   };
 
-  render() {
-    return (
-      <div className="App">
-        <h1>This is a React App.</h1>
-        <button onClick={this.switchNameHandler}>Switch Name</button>
-        <Person name={this.state.persons[0].name} age={this.state.persons[0].age}>I'm a software Engineer.</Person>
-        <Person name={this.state.persons[1].name} age={this.state.persons[1].age}>I'm a data Engineer.</Person>
-      </div>
-    );
-    // return React.createElement('div', { className: 'App' }, React.createElement('h1', null, 'I\'m a React App.'));
-  }
+  return (
+    <div className="App">
+      <h1>This is a React App.</h1>
+      <button onClick={switchNameHandler}>Switch Name</button>
+      <Person name={personsState.persons[0].name} age={personsState.persons[0].age}>I'm a software Engineer.</Person>
+      <Person name={personsState.persons[1].name} age={personsState.persons[1].age}>I'm a data Engineer.</Person>
+    </div>
+  );
+  // return React.createElement('div', { className: 'App' }, React.createElement('h1', null, 'I\'m a React App.'));
 }
 
-export default App;
+export default app;
+
