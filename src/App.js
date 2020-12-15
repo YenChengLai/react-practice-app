@@ -11,7 +11,7 @@ class App extends Component {
     ]
   };
 
-  switchNameHandler = (newName) => {
+  /*switchNameHandler = (newName) => {
     // This won't work, React would not recognize direct mutation of the state.
     // this.state.persons[0].name = 'Franky';
     this.setState({
@@ -21,7 +21,7 @@ class App extends Component {
       ],
       showPersons: false
     })
-  };
+  };*/
 
   nameChangedHandler = (event) => {
     this.setState({
@@ -52,14 +52,9 @@ class App extends Component {
     if (this.state.showPersons) {
       persons = (
         <div>
-          <Person
-            name={this.state.persons[0].name}
-            age={this.state.persons[0].age}
-            click={this.switchNameHandler.bind(this, 'Kobe')}
-            change={this.nameChangedHandler}>I'm a software Engineer.</Person>
-          <Person
-            name={this.state.persons[1].name}
-            age={this.state.persons[1].age}>I'm a data Engineer.</Person>
+          {this.state.persons.map(person => {
+            return <Person name={person.name} age={person.age}></Person>;
+          })}
         </div>
       );
     }
