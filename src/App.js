@@ -18,7 +18,8 @@ class App extends Component {
       persons: [
         { name: newName, age: 28 },
         { name: 'John', age: 30 }
-      ]
+      ],
+      showPersons: false
     })
   };
 
@@ -29,6 +30,12 @@ class App extends Component {
         { name: 'John', age: 30 }
       ]
     });
+  }
+
+  togglePersonsHandler = () => {
+    this.setState({
+      showPersons: !this.state.showPersons
+    })
   }
 
   render() {
@@ -44,17 +51,20 @@ class App extends Component {
       <div className="App">
         <h1>This is a React App.</h1>
         <button
-          onClick={() => this.switchNameHandler('James')}
-          style={style}
-        >Switch Name</button>
-        <Person
-          name={this.state.persons[0].name}
-          age={this.state.persons[0].age}
-          click={this.switchNameHandler.bind(this, 'Kobe')}
-          change={this.nameChangedHandler}>I'm a software Engineer.</Person>
-        <Person
-          name={this.state.persons[1].name}
-          age={this.state.persons[1].age}>I'm a data Engineer.</Person>
+          onClick={this.togglePersonsHandler}
+          style={style}>Switch Name</button>
+        {
+          this.state.showPersons === true ? <div>
+            <Person
+              name={this.state.persons[0].name}
+              age={this.state.persons[0].age}
+              click={this.switchNameHandler.bind(this, 'Kobe')}
+              change={this.nameChangedHandler}>I'm a software Engineer.</Person>
+            <Person
+              name={this.state.persons[1].name}
+              age={this.state.persons[1].age}>I'm a data Engineer.</Person>
+          </div> : null
+        }
       </div>
     );
     // return React.createElement('div', { className: 'App' }, React.createElement('h1', null, 'I\'m a React App.'));
